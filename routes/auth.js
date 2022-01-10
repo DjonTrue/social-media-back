@@ -30,8 +30,9 @@ router.post("/login", async (req, res) => {
       user.password
     );
     !validPassword && res.status(400).json("wrong password");
-
-    res.status(200).json(user);
+    
+    const {password, ...userWithoutPassword} = user.toJSON()
+    res.status(200).json(userWithoutPassword);
   } catch (error) {
     res.status(500).json(error);
   }
